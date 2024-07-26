@@ -1,0 +1,24 @@
+import discord
+from discord.ext import commands
+import random
+import os   
+
+
+
+intents = discord.Intents.default()
+intents.members = True
+intents.message_content = True
+
+bot = commands.Bot(command_prefix="?" , intents=intents)
+
+@bot.command()
+async def mem(ctx):
+    images = os.listdir("images")
+    random_ing = random.choice(images)  
+    with open(f'images/{random_ing}', 'rb') as f:
+        # В переменную кладем файл, который преобразуется в файл библиотеки Discord!
+        picture = discord.File(f)
+   # Можем передавать файл как параметр!
+    await ctx.send(file=picture)
+
+bot.run('MTI1Njg1ODQxMzM0Njk3OTg5MA.GCSlw6.Gzpv40-NFmXOi7rieMO1hdZsIQirqBmfR6zMbM')
